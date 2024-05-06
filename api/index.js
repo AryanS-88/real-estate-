@@ -3,14 +3,24 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
-mongoose
-  .connect(process.env.MONGO)
-  .then(() => {
-    console.log('connected to DB')
-  })
-  .catch((err) => {
+// mongoose
+//   .connect(process.env.MONGO)
+//   .then(() => {
+//     console.log('connected to DB')
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
+const ConnectToDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO)
+    console.log('Connected to DB')
+  } catch (err) {
     console.log(err)
-  })
+  }
+}
+
+ConnectToDB()
 
 const app = express()
 app.listen(3000, () => {
